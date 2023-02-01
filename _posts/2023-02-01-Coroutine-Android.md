@@ -33,7 +33,7 @@ date: 2023-02-01
 
 #### 비동기 처리
  - 특정 로직의 실행 끝날때까지 기다리지 않고 나머지 코드를 먼저 실행하는 처리 방식
-  ```kotlin
+  ```java
   // 일반 callback 함수
     fun goCompany(person: Person){
         val 철수 = person
