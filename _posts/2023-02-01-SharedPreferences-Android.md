@@ -25,6 +25,7 @@ date: 2023-02-01
             }
         }
         {% endhighlight %}
+
 2. `SaveData메소드`: 객체를 edit()사용해 수정모드사용, put메소드롤 key값 지정 후 apply()로 데이터 저장
         {% highlight kotlin %}
         private fun saveData(){
@@ -35,6 +36,7 @@ date: 2023-02-01
             edit.apply()    // 저장
         }
         {% endhighlight %}
+
 3. `loadData메소드`: getShared~메소드를 통해 key값 지정
         {% highlight kotlin %}
         private fun loadData(){
@@ -43,6 +45,7 @@ date: 2023-02-01
             binding.etHello.setText(pref.getString("name",""))
         }
         {% endhighlight %}
+        
 4.`Destory()`: 프로그램 종료시점
         {% highlight kotlin %}
         override fun onDestroy(){
