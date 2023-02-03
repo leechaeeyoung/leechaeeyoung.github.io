@@ -40,8 +40,47 @@ date: 2023-02-01
     ```
 3. JSON 형태 모델 클래스를 생성
     ```java
-    class PostResult{
-        @Seriallize
+    data class GithubRepo (@SerializedName("name") val name: String)
+    ```
+4. 인터페이스 정의
+    ```java
+    interface GithubClient{
+        @GET("/users/{user}/repos")
+        fun reposForUser(@Path("user") user: String): List<GitHubRepo>
     }
     ```
-4. 
+5. Retrofit 인스턴스 생성
+    ```java
+    class MainActivity: AppCompatActivity(){
+        override fun onCreate(savedInstanceState: Bundle?){
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
+
+            // Request
+            val builder: Retrofit.Builder = Retrofit.Builder()
+                .baseUrl("http://api.github.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+            
+            val retrofit: Retrofit = builder.build()  // Retrofit 객체
+            val client: GithubClient = retrofit.create(GithubClient::class.java)
+            val call: Call<List<GithubRepo>> = client.reposForUser("leechaeeyoung") // 서버연동 시작
+
+            // 서버로부터 response할때마다 enqueue메소드 실행
+            call.enqueue(object: Callback<List<GithubRepo>>){
+                override fun onFailure(call: Call<List<GitHubRepo>>, t: Throwable){
+                    Log.e("debugTest","error:(${t.message})")
+                }
+                // response
+                override fun onResponse(call: Call<List<GithubRepo>>, response: Response<List<GithubRepo>>){
+                    val repos: List<GithubRepo>? = response.body()
+                    var reposStr = ""
+
+                    repos?.forEach{ it ->
+                        reposStr += "$it\n" }
+                    textView.text = reposStr // 화면에 띄우기
+                }
+            }
+        }
+    }
+    ```
+    
