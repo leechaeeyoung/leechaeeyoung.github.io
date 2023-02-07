@@ -82,6 +82,7 @@ val request = Request.Builder().url("$BASE_URL$BASE_PATH/?"+
     )
   ```
   - - - 
+
 ## 바로 결과가 반환된 책임 바로 호출가능한지
 #### Retrofit
  - 결과 반환시 메인스레드에 전달되기 때문에 자동으로 UI관련 결과값 사용가능
@@ -101,3 +102,4 @@ val request = Request.Builder().url("$BASE_URL$BASE_PATH/?"+
             Toast.makeText(...).show()
         }
         }
+    ```
