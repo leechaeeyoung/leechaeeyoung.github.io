@@ -61,6 +61,7 @@ date: 2023-02-01
     }
   ```
 - 만약 wakeUp이 실행 후 goCompany를 빠져나가도 wakeUp함수 일이 끝날 시 goCompany로 돌아올 수 있다. (바동기 처리 장점)
+
  - - -
 
  ### 코틀린 함수
